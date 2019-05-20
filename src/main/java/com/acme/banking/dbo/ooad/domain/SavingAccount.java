@@ -1,6 +1,5 @@
 package com.acme.banking.dbo.ooad.domain;
 
-import com.acme.banking.dbo.legacy.domain.AccountType;
 
 /**
  * Encapsulated state + behavior
