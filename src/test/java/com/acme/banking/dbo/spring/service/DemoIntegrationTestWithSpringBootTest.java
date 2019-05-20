@@ -22,7 +22,7 @@ import static org.mockito.Mockito.*;
 public class DemoIntegrationTestWithSpringBootTest {
     @Autowired private ReportingService reportingService;
     @Autowired private TransferService transferService;
-    @MockBean private AccountRepository accounts; //mock(AccountRepository.class);
+    @MockBean private AccountRepository accounts; //mock(StubAccountRepository.class);
 
     @Test
     public void shouldUseStubInsteadOfProductionClassWhenCreateSpringContext() {

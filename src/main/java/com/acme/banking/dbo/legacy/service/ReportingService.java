@@ -1,18 +1,28 @@
 package com.acme.banking.dbo.legacy.service;
 
-import com.acme.banking.dbo.legacy.domain.Account;
-import com.acme.banking.dbo.legacy.domain.AccountType;
+import com.acme.banking.dbo.ooad.dal.AccountRepository;
+import com.acme.banking.dbo.ooad.domain.Account;
 
-/** TODO Rename according intention, extract interface and move out behavior for polymorhpic algorithm */
 public class ReportingService {
-    public static String reportForAccount(long id) {
-        Account account = AccountRepository.findById(id);
-        String commonReportString = "## " + account.id + " " + account.amount;
+    //Creator [GRASP]
+    //Factory Method [GoF]
+    //Abstract Factory [GoF]
+    //Registry [PoEAA]
+    //Field DI
+    private AccountRepository accounts;
 
-        if (account.type == AccountType.SAVING) {
-            return commonReportString + " S";
-        } else {
-            return commonReportString + " C " + account.amount;
-        }
+    //Constructor DI
+    public ReportingService(AccountRepository accounts) {
+        this.accounts = accounts;
+    }
+
+    //Setter DI
+    public void setAccounts(AccountRepository accounts) {
+        this.accounts = accounts;
+    }
+
+    public String reportForAccount(long id) {
+        Account account = accounts.findById(id);
+        return "## " + account.getId() + " : " + account.getAmount();
     }
 }
