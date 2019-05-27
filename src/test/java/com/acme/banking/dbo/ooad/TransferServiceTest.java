@@ -1,5 +1,6 @@
 package com.acme.banking.dbo.ooad;
 
+import com.acme.banking.dbo.ooad.dal.AccountRepository;
 import com.acme.banking.dbo.ooad.domain.Account;
 import com.acme.banking.dbo.ooad.domain.SavingAccount;
 import com.acme.banking.dbo.ooad.service.TransferService;
@@ -25,4 +26,14 @@ public class TransferServiceTest {
         verify(toAccount).deposit(anyDouble());
         //endregion
     }
+
+//    @Test(expected = IllegalStateException.class)
+//    public void shouldGetExceptionWhenNoAccountFound() {
+//        AccountRepository stubAccountRepository = mock(AccountRepository.class);
+//        when(stubAccountRepository.findById(anyLong()))
+//                .thenThrow(new IllegalStateException());
+//
+//        TransferService sut = new TransferService(stubAccountRepository);
+//        sut.reportForAccount(0L);
+//    }
 }
