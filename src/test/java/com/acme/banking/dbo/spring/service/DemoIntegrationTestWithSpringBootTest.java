@@ -2,6 +2,7 @@ package com.acme.banking.dbo.spring.service;
 
 import com.acme.banking.dbo.spring.dao.AccountRepository;
 import com.acme.banking.dbo.spring.domain.Account;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,6 @@ import java.util.Optional;
 import static org.fest.assertions.api.Assertions.assertThat;
 import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.*;
-
 @RunWith(SpringRunner.class)
 @ContextConfiguration({"classpath:test-spring-context.xml", "classpath:spring-context.xml"})
 @ActiveProfiles("test")
@@ -25,6 +25,7 @@ public class DemoIntegrationTestWithSpringBootTest {
     @MockBean private AccountRepository accounts; //mock(StubAccountRepository.class);
 
     @Test
+    @Ignore
     public void shouldUseStubInsteadOfProductionClassWhenCreateSpringContext() {
         Account accountStub = mock(Account.class);
         when(accountStub.toString()).thenReturn("0 100.0 S");
@@ -35,6 +36,7 @@ public class DemoIntegrationTestWithSpringBootTest {
     }
 
     @Test //TODO Interaction-based VS State-based testing
+    @Ignore
     public void shouldCallPropertiesForAccountsWhenTransfer() {
         Account accountFromStub = mock(Account.class);
         when(accountFromStub.getAmount()).thenReturn(100d);

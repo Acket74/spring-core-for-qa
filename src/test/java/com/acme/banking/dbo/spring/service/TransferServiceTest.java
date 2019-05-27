@@ -30,6 +30,7 @@ public class TransferServiceTest {
     private AccountRepository accounts; //mock(StubAccountRepository.class)
     private long FROM_ACCOUNT_ID = 1;
     private long TO_ACCOUNT_ID = 2;
+    private long WRONG_ACCOUNT_ID = 3;
 
     @Test
     public void shouldTransferAmountNotMoreThanExistOnFromAccountBetweenExistingAccounts(){
@@ -37,9 +38,9 @@ public class TransferServiceTest {
         Account accountTo = mock(Account.class);
         when(accounts.findById(FROM_ACCOUNT_ID)).thenReturn(Optional.of(accountFrom));
         when(accounts.findById(TO_ACCOUNT_ID)).thenReturn(Optional.of(accountTo));
-        transferService.transfer(1,2,100);
-        verify(accountFrom, times(1)).setAmount(anyDouble());
-        verify(accountTo, times(1)).setAmount(anyDouble()   );
+        transferService.transfer(FROM_ACCOUNT_ID,TO_ACCOUNT_ID,100);
+        verify(accountFrom, times(1)).setAmount(-100);
+        verify(accountTo, times(1)).setAmount(100);
         verify(accountFrom, times(1)).getAmount();
         verify(accountTo, times(1)).getAmount();
     }
@@ -50,7 +51,7 @@ public class TransferServiceTest {
         Account accountTo = mock(Account.class);
         when(accounts.findById(FROM_ACCOUNT_ID)).thenReturn(Optional.of(accountFrom));
         when(accounts.findById(TO_ACCOUNT_ID)).thenReturn(Optional.of(accountTo));
-        transferService.transfer(3, 2, 100);
+        transferService.transfer(WRONG_ACCOUNT_ID, TO_ACCOUNT_ID, 100);
     }
 
     @Test(expected = IllegalStateException.class)
@@ -59,6 +60,6 @@ public class TransferServiceTest {
         Account accountTo = mock(Account.class);
         when(accounts.findById(FROM_ACCOUNT_ID)).thenReturn(Optional.of(accountFrom));
         when(accounts.findById(TO_ACCOUNT_ID)).thenReturn(Optional.of(accountTo));
-        transferService.transfer(1, 3, 100);
+        transferService.transfer(FROM_ACCOUNT_ID, WRONG_ACCOUNT_ID, 100);
     }
 }

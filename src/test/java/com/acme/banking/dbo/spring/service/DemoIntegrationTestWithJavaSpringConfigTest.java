@@ -2,6 +2,7 @@ package com.acme.banking.dbo.spring.service;
 
 import com.acme.banking.dbo.spring.dao.AccountRepository;
 import com.acme.banking.dbo.spring.domain.Account;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@Ignore
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = DemoIntegrationTestWithJavaSpringConfigTest.TestConfig.class)
 @ActiveProfiles("test")
@@ -41,6 +43,7 @@ public class DemoIntegrationTestWithJavaSpringConfigTest {
     }
 
     @Test
+    @Ignore
     public void shouldUseStubWithinSpringContext() {
         assertThat(reportingService.accountReport(0L))
                 .isEqualTo("## 0 100.0 S");
